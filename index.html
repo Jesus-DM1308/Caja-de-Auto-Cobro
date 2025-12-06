@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacia - Sistema de Auto Cobro</title>
+    <meta name="description" content="Sistema de auto cobro para farmacia con interfaz intuitiva y moderna">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Contenido Principal -->
+    <main class="main-content" id="mainContent">
+        <!-- Mensaje de Bienvenida -->
+        <section class="welcome-section">
+            <h1 class="welcome-title">¡Bienvenido a Farmacias Guadalajara!</h1>
+            <p class="welcome-subtitle">Encuentra tus medicamentos de forma rápida y segura</p>
+        </section>
+
+        <!-- Buscador Central (Solo visual, abre el teclado) -->
+        <section class="search-section">
+            <div class="search-container" id="searchContainerMain">
+                <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="#4A90E2" stroke-width="2" />
+                    <path d="M21 21L16.65 16.65" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <input type="text" id="searchInputMain" class="search-input"
+                    placeholder="Toca aquí para buscar medicamentos..." autocomplete="off" readonly>
+            </div>
+
+        <!-- Secciones de Escaneo -->
+        <section class="scan-section">
+            <div class="scan-options">
+                <!-- Escanear Código de Producto -->
+                <div class="scan-card">
+                    <div class="scan-icon-container">
+                        <svg class="scan-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="14" y="2" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="2" y="14" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="14" y="14" width="8" height="8" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4" y1="6" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+                            <line x1="16" y1="6" x2="20" y2="6" stroke="currentColor" stroke-width="2"/>
+                            <line x1="4" y1="18" x2="8" y2="18" stroke="currentColor" stroke-width="2"/>
+                            <line x1="16" y1="18" x2="20" y2="18" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3 class="scan-title">Escanea el código de tu producto</h3>
+                    <p class="scan-description">Escanea el código de barras para agregar rápidamente</p>
+                </div>
+
+                <!-- Escanear Receta con IA -->
+                <div class="scan-card">
+                    <div class="scan-icon-container ai">
+                        <svg class="scan-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="15" r="3" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 12V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M12 17V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M10.5 13.5L9.5 14.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M14.5 15.5L13.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <h3 class="scan-title">Escanea tu receta</h3>
+                    <p class="scan-description">Escanea tu receta médica y la IA detectará los medicamentos</p>
+                </div>
+            </div>
+        </section>
+        </section>
+    </main>
+
+    <!-- Sección de Resultados (visible cuando el teclado está activo) -->
+    <div class="search-results-overlay" id="searchResultsOverlay">
+        <div class="results-title-section">
+            <h2 class="results-main-title">Resultados de búsqueda</h2>
+        </div>
+        <section class="search-results-keyboard">
+            <div class="results-header">
+                <h3 class="results-count" id="resultsCountKeyboard">Escribe para buscar medicamentos</h3>
+            </div>
+            <div class="results-grid" id="resultsGridKeyboard">
+                <!-- Los resultados se mostrarán aquí -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Buscador Sticky (aparece cuando se cierra el teclado con búsqueda activa) -->
+    <div class="sticky-search-bar" id="stickySearchBar">
+        <div class="sticky-search-container" id="stickySearchContainer">
+            <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="8" stroke="#4A90E2" stroke-width="2" />
+                <path d="M21 21L16.65 16.65" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <input type="text" id="stickySearchInput" class="sticky-search-input"
+                placeholder="Toca para continuar buscando..." autocomplete="off" readonly>
+        </div>
+    </div>
+
+    <!-- Teclado Virtual con Buscador Integrado -->
+    <div class="virtual-keyboard" id="virtualKeyboard">
+        <div class="keyboard-header">
+            <button class="filter-button" id="filterButton">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 4H21V6H3V4ZM7 11H17V13H7V11ZM11 18H13V20H11V18Z" fill="currentColor" />
+                </svg>
+                <span id="filterText">Medicamento</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 10L12 15L17 10H7Z" fill="currentColor" />
+                </svg>
+            </button>
+            <div class="filter-dropdown" id="filterDropdown">
+                <button class="filter-option" data-filter="medicamento">Medicamento</button>
+                <button class="filter-option" data-filter="activo">Activo</button>
+                <button class="filter-option" data-filter="farmaceutica">Farmacéutica</button>
+            </div>
+            <div class="keyboard-search-container">
+                <svg class="search-icon" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="#4A90E2" stroke-width="2" />
+                    <path d="M21 21L16.65 16.65" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <input type="text" id="searchInput" class="keyboard-search-input"
+                    placeholder="Buscar medicamentos por nombre, principio activo o código..." autocomplete="off">
+            </div>
+        </div>
+        <div class="keyboard-container" id="keyboardContainer">
+            <!-- Las teclas se generarán dinámicamente -->
+        </div>
+        <button class="keyboard-close" id="keyboardClose">✕ CERRAR</button>
+    </div>
+
+    <!-- Modal de Detalle del Producto -->
+    <div class="product-modal" id="productModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-body">
+                <div class="modal-left">
+                    <img src="" alt="" class="modal-image" id="modalImage">
+                    <div class="modal-price" id="modalPrice"></div>
+                    <button class="modal-add-btn" id="modalAddBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                        Agregar al Carrito
+                    </button>
+                </div>
+                <div class="modal-info">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <p class="modal-description" id="modalDescription"></p>
+                    <div class="modal-details">
+                        <div class="modal-detail-item">
+                            <span class="modal-detail-label">Principio(s) Activo(s):</span>
+                            <span class="modal-detail-value" id="modalActivos"></span>
+                        </div>
+                        <div class="modal-detail-item">
+                            <span class="modal-detail-label">Laboratorio:</span>
+                            <span class="modal-detail-value" id="modalFarmaceutica"></span>
+                        </div>
+                    </div>
+                    <div class="modal-section">
+                        <h3 class="modal-section-title">📋 Instrucciones</h3>
+                        <p class="modal-section-text" id="modalInstrucciones"></p>
+                    </div>
+                    <div class="modal-section warning">
+                        <h3 class="modal-section-title">⚠️ Advertencias</h3>
+                        <p class="modal-section-text" id="modalAdvertencias"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vista del Carrito (3 secciones) -->
+    <div class="cart-view" id="cartView">
+        <!-- Sección 1: Buscador Superior -->
+        <div class="cart-search-section">
+            <div class="cart-search-container" id="cartSearchContainer">
+                <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="8" stroke="#4A90E2" stroke-width="2" />
+                    <path d="M21 21L16.65 16.65" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" />
+                </svg>
+                <input type="text" id="cartSearchInput" class="cart-search-input"
+                    placeholder="Buscar más medicamentos..." autocomplete="off" readonly>
+            </div>
+        </div>
+
+        <!-- Contenedor de las 3 secciones principales -->
+        <div class="cart-main-grid">
+            <!-- Sección 2: Medicamento Recién Agregado -->
+            <div class="cart-recent-section">
+                <h2 class="cart-section-title">Medicamento Recién Agregado</h2>
+                <div class="recent-medication-card" id="recentMedicationCard">
+                    <!-- Se llenará dinámicamente -->
+                </div>
+            </div>
+
+            <!-- Sección 3: Historial de Medicamentos Agregados -->
+            <div class="cart-history-section">
+                <div class="cart-history-header">
+                    <h2 class="cart-section-title">Carrito de Compras</h2>
+                    <div class="cart-summary">
+                        <span class="cart-items-count" id="cartItemsCount">0 productos</span>
+                        <span class="cart-total-price" id="cartTotalPrice">$0.00</span>
+                    </div>
+                </div>
+                <div class="cart-items-list" id="cartItemsList">
+                    <!-- Lista de productos en el carrito -->
+                </div>
+                <div class="cart-actions">
+                    <button class="cart-checkout-btn" id="cartCheckoutBtn">
+                        Proceder al Pago
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Medicamentos Más Vendidos -->
+        <section class="bestsellers-section" id="bestsellersSection">
+            <h2 class="section-title">Medicamentos Más Vendidos</h2>
+            <p class="section-subtitle">Acceso rápido a los productos más solicitados</p>
+
+            <div class="bestsellers-carousel" id="bestsellersCarousel">
+                <!-- Los medicamentos se cargarán dinámicamente desde JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Vista de Pago -->
+    <div class="payment-view" id="paymentView">
+        <div class="payment-container">
+            <h2 class="payment-title">Resumen de Pago</h2>
+            <div class="payment-total-display">
+                <span class="payment-total-label">Total a Pagar:</span>
+                <span class="payment-total-amount" id="paymentTotalAmount">$0.00</span>
+            </div>
+
+            <h3 class="payment-subtitle">Selecciona tu método de pago</h3>
+            <div class="payment-methods">
+                <button class="payment-method-btn" onclick="selectPaymentMethod('card')">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20 4H4C2.89 4 2.01 4.89 2.01 6L2 18C2 19.11 2.89 20 4 20H20C21.11 20 22 19.11 22 18V6C22 4.89 21.11 4 20 4ZM20 18H4V12H20V18ZM20 8H4V6H20V8Z"
+                            fill="currentColor" />
+                    </svg>
+                    Tarjeta
+                </button>
+                <button class="payment-method-btn" onclick="selectPaymentMethod('cash')">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.8 10.9C9.53 10.31 8.8 9.7 8.8 8.75C8.8 7.66 9.81 6.9 11.5 6.9C13.28 6.9 13.94 7.75 14 9H16.21C16.14 7.28 15.09 5.7 13 5.19V3H10V5.16C8.06 5.63 7 7.03 7 8.9C7 11.81 9.4 12.41 11.71 12.97C14.06 13.54 15 14.38 15 15.6C15 16.8 13.98 17.5 12.5 17.5C10.43 17.5 9.5 16.53 9.31 15H7.1C7.24 17.26 8.91 18.86 11 19.27V21H14V19.29C16.03 18.84 17.2 17.42 17.2 15.4C17.2 12.11 14.53 11.53 11.8 10.9Z"
+                            fill="currentColor" />
+                    </svg>
+                    Efectivo
+                </button>
+                <button class="payment-method-btn" onclick="selectPaymentMethod('mixed')">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21 18V19H24V21H21V24H19V21H16V19H19V16H21V18ZM13 19.29V21H11V19.27C8.91 18.86 7.24 17.26 7.1 15H9.31C9.5 16.53 10.43 17.5 12.5 17.5C13.98 17.5 15 16.8 15 15.6C15 14.38 14.06 13.54 11.71 12.97C9.4 12.41 7 11.81 7 8.9C7 7.03 8.06 5.63 10 5.16V3H13V5.19C15.09 5.7 16.14 7.28 16.21 9H14C13.94 7.75 13.28 6.9 11.5 6.9C9.81 6.9 8.8 7.66 8.8 8.75C8.8 9.7 9.53 10.31 11.8 10.9C14.53 11.53 17.2 12.11 17.2 15.4C17.2 16.14 16.94 16.82 16.5 17.38C16.19 17.03 15.83 16.72 15.43 16.46C15.8 16.22 16 15.92 16 15.6C16 14.38 15.06 13.54 12.71 12.97L11.8 10.9Z"
+                            fill="currentColor" />
+                    </svg>
+                    Mixto
+                </button>
+            </div>
+
+            <!-- Detalles dinámicos del pago -->
+            <div class="payment-details" id="paymentDetails">
+                <!-- Se llenará dinámicamente según el método -->
+            </div>
+
+            <div class="payment-actions">
+                <button class="payment-cancel-btn" onclick="hidePaymentView()">Cancelar</button>
+                <button class="payment-confirm-btn" id="confirmPaymentBtn" disabled
+                    onclick="processPayment()">Pagar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vista de Agradecimiento -->
+    <div class="thank-you-view" id="thankYouView">
+        <div class="thank-you-content">
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 16.17L4.83 12L3.41 13.41L9 19L21 7L19.59 5.59L9 16.17Z" fill="white" />
+                </svg>
+            </div>
+            <h1 class="thank-you-title">¡Gracias por tu compra!</h1>
+            <p class="thank-you-message">Pasa con tu ticket a recoger tus medicamentos</p>
+            <button class="finish-btn" onclick="resetApp()">Finalizar</button>
+        </div>
+    </div>
+
+    <!-- Carrito flotante (aparece cuando se agrega un producto) -->
+    <div class="cart-float" id="cartFloat" style="display: none;">
+        <div class="cart-icon-container">
+            <svg class="cart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M9 2L7.17 4H3C1.9 4 1 4.9 1 6V18C1 19.1 1.9 20 3 20H21C22.1 20 23 19.1 23 18V6C23 4.9 22.1 4 21 4H16.83L15 2H9Z"
+                    fill="white" />
+            </svg>
+            <span class="cart-count" id="cartCount">0</span>
+        </div>
+        <span class="cart-total" id="cartTotal">$0.00</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
