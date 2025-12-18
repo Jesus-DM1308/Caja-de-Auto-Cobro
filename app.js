@@ -1,140 +1,20 @@
-// ===== BASE DE DATOS DE MEDICAMENTOS =====
-const allMedications = [
-    {
-        id: 1,
-        name: 'Salpifar 500mg',
-        description: 'Analgésico y antipirético',
-        price: 100,
-        image: 'images/paracetamol_pisa.jpg',
-        activos: ['Paracetamol'],
-        farmaceutica: 'Pisa',
-        instrucciones: 'Tomar 1 tableta cada 6-8 horas. No exceder 4 gramos al día.',
-        advertencias: 'No consumir con alcohol. Consultar al médico en caso de enfermedad hepática.'
-    },
-    {
-        id: 2,
-        name: 'Dolprofen 400mg',
-        description: 'Antiinflamatorio no esteroideo',
-        price: 100,
-        image: 'images/ibuprofeno400mg_collins.jpeg',
-        activos: ['Ibuprofeno'],
-        farmaceutica: 'Collins',
-        instrucciones: 'Tomar 1 tableta cada 8 horas con alimentos.',
-        advertencias: 'No usar en caso de úlcera gástrica. Evitar durante el embarazo.'
-    },
-    {
-        id: 3,
-        name: 'Vitamina C 1000mg',
-        description: 'Suplemento vitamínico',
-        price: 100,
-        image: 'images/vitaminaC1000mg_naturallife.jpg',
-        activos: ['Ácido Ascórbico'],
-        farmaceutica: 'Natural Life',
-        instrucciones: 'Tomar 1 tableta al día preferentemente con alimentos.',
-        advertencias: 'Dosis altas pueden causar malestar estomacal.'
-    },
-    {
-        id: 4,
-        name: 'Amoxicilina 500mg',
-        description: 'Antibiótico de amplio espectro',
-        price: 100,
-        image: 'images/amoxicilina500mg_pisa.jpg',
-        activos: ['Amoxicilina'],
-        farmaceutica: 'Pisa',
-        instrucciones: 'Tomar 1 cápsula cada 8 horas durante 7-10 días. Completar el tratamiento.',
-        advertencias: 'No usar si es alérgico a penicilinas. Consultar al médico durante el embarazo.'
-    },
-    {
-        id: 5,
-        name: 'Omeprazol 40mg',
-        description: 'Inhibidor de la bomba de protones',
-        price: 100,
-        image: 'images/omeprazol40mg_amsa.png',
-        activos: ['Omeprazol'],
-        farmaceutica: 'Amsa',
-        instrucciones: 'Tomar 1 cápsula en ayunas, 30 minutos antes del desayuno.',
-        advertencias: 'Uso prolongado puede afectar la absorción de vitamina B12 y magnesio.'
-    },
-    {
-        id: 6,
-        name: 'Losartán 50mg',
-        description: 'Antihipertensivo',
-        price: 100,
-        image: 'images/losartan50mg_pisa.jpeg',
-        activos: ['Losartán'],
-        farmaceutica: 'Pisa',
-        instrucciones: 'Tomar 1 tableta al día a la misma hora.',
-        advertencias: 'No recomendado para mujeres embarazadas. Puede causar mareos al inicio.'
-    },
-    {
-        id: 7,
-        name: 'Metformina 850mg',
-        description: 'Antidiabético oral',
-        price: 100,
-        image: 'images/metformina850mg_amsa.jpg',
-        activos: ['Metformina'],
-        farmaceutica: 'Amsa',
-        instrucciones: 'Tomar 1 tableta con alimentos, 2-3 veces al día según indicación médica.',
-        advertencias: 'Puede causar malestar gastrointestinal. No consumir alcohol.'
-    },
-    {
-        id: 8,
-        name: 'Teinemia 20mg',
-        description: 'Reductor de colesterol',
-        price: 100,
-        image: 'images/teinemia20mg_pisa.jpg',
-        activos: ['Atorvastatina'],
-        farmaceutica: 'Pisa',
-        instrucciones: 'Tomar 1 tableta al día, preferentemente por la noche.',
-        advertencias: 'Evitar consumo excesivo de toronja. Reportar dolor muscular inusual.'
-    },
-    {
-        id: 9, 
-        name: 'Laritol 10mg',
-        description: 'Antihistamínico',
-        price: 100,
-        image: 'images/laritol_maver.jpg',
-        activos: ['Loratadina'],
-        farmaceutica: 'Maver',
-        instrucciones: 'Tomar 1 tableta al día. No causa somnolencia en la mayoría de personas.',
-        advertencias: 'Consultar al médico si tiene enfermedad hepática.'
-    },
-    {
-        id: 10,
-        name: 'Ranitidina 300mg',
-        description: 'Antiulceroso y antiácido',
-        price: 100,
-        image: 'images/ranitidina300mg_amsa.png',
-        activos: ['Ranitidina'],
-        farmaceutica: 'Amsa',
-        instrucciones: 'Tomar 1 tableta 30 minutos antes de las comidas o al acostarse.',
-        advertencias: 'Consultar al médico si los síntomas persisten más de 2 semanas.'
-    },
-    {
-        id: 11,
-        name: 'Diclofenaco 50mg',
-        description: 'Antiinflamatorio potente',
-        price: 100,
-        image: 'images/diclofenaco50mg_amsa.png',
-        activos: ['Diclofenaco'],
-        farmaceutica: 'Amsa',
-        instrucciones: 'Tomar 1 tableta cada 8-12 horas con alimentos.',
-        advertencias: 'No usar en caso de úlcera gástrica. Evitar durante el embarazo y lactancia.'
-    },
-    {
-        id: 12,
-        name: 'Caridoxen',
-        description: 'Relajante muscular con analgésico',
-        price: 100,
-        image: 'images/caridoxen_mavi.jpg',
-        activos: ['Naproxeno', 'Carisoprodol'],
-        farmaceutica: 'Mavi',
-        instrucciones: 'Tomar 1 tableta cada 8 horas. Tratamiento no debe exceder 2-3 semanas.',
-        advertencias: 'Puede causar somnolencia. No conducir ni operar maquinaria. No consumir alcohol.'
-    }
-];
+// ===== CONFIGURACIÓN API =====
+const API_URL = 'http://localhost:3000/api';
 
-const medications = allMedications.slice(0, 4); // Solo los primeros 4 para bestsellers
+// Helper para mapear datos del backend al formato del frontend
+function mapMedicationFromApi(med) {
+    return {
+        id: med.id,
+        name: med.name,
+        description: med.description || '',
+        price: typeof med.price === 'string' ? parseFloat(med.price) : med.price,
+        image: med.image_url || 'images/default_medication.jpg', // Fallback image
+        activos: med.active_ingredients ? med.active_ingredients.split(',').map(s => s.trim()) : [],
+        farmaceutica: med.pharmaceutical_company || 'Desconocido',
+        instrucciones: med.instructions || 'Consulte a su médico.',
+        advertencias: med.warnings || 'Sin advertencias específicas.'
+    };
+}
 
 // ===== ESTADO DEL CARRITO =====
 let cart = [];
@@ -161,13 +41,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== RENDERIZAR MEDICAMENTOS MÁS VENDIDOS =====
-function initializeBestsellers() {
+async function initializeBestsellers() {
     const carousel = document.getElementById('bestsellersCarousel');
 
-    medications.forEach((med, index) => {
-        const card = createMedicationCard(med, index);
-        carousel.appendChild(card);
-    });
+    try {
+        const response = await fetch(`${API_URL}/medications/bestsellers?limit=4`);
+        const data = await response.json();
+
+        if (data.success && data.data) {
+            carousel.innerHTML = '';
+            data.data.forEach((apiMed, index) => {
+                const med = mapMedicationFromApi(apiMed);
+                const card = createMedicationCard(med, index);
+                carousel.appendChild(card);
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching bestsellers:', error);
+        carousel.innerHTML = '<p style="text-align:center; width:100%;">No se pudieron cargar los productos más vendidos.</p>';
+    }
 }
 
 function createMedicationCard(medication, index) {
@@ -176,7 +68,7 @@ function createMedicationCard(medication, index) {
     card.style.animation = `fadeInUp 0.6s ease ${index * 0.1}s backwards`;
 
     card.innerHTML = `
-        <img src="${medication.image}" alt="${medication.name}" class="medication-image">
+        <img src="${medication.image}" alt="${medication.name}" class="medication-image" onerror="this.src='images/default.jpg'">
         <h3 class="medication-name">${medication.name}</h3>
         <p class="medication-description">${medication.farmaceutica}</p>
         <div class="medication-footer">
@@ -402,47 +294,54 @@ function handleKeyPress(key) {
     performRealtimeSearch();
 }
 
-// ===== BÚSQUEDA EN TIEMPO REAL =====
+// ===== BÚSQUEDA EN TIEMPO REAL (DEBOUNCE) =====
+let searchTimeout;
+
 function performRealtimeSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const query = searchInput.value.trim().toUpperCase();
-    const resultsGrid = document.getElementById('resultsGridKeyboard');
-    const resultsCount = document.getElementById('resultsCountKeyboard');
+    clearTimeout(searchTimeout);
 
-    if (query === '') {
-        resultsCount.textContent = 'Escribe para buscar medicamentos';
-        resultsGrid.innerHTML = '';
-        return;
-    }
+    searchTimeout = setTimeout(async () => {
+        const searchInput = document.getElementById('searchInput');
+        const query = searchInput.value.trim();
+        const resultsGrid = document.getElementById('resultsGridKeyboard');
+        const resultsCount = document.getElementById('resultsCountKeyboard');
 
-    // Filtrar medicamentos según el filtro actual
-    const results = allMedications.filter(med => {
-        if (currentFilter === 'medicamento') {
-            return med.name.toUpperCase().includes(query) ||
-                med.description.toUpperCase().includes(query);
-        } else if (currentFilter === 'activo') {
-            return med.activos.some(activo => activo.toUpperCase().includes(query));
-        } else if (currentFilter === 'farmaceutica') {
-            return med.farmaceutica.toUpperCase().includes(query);
+        if (query === '') {
+            resultsCount.textContent = 'Escribe para buscar medicamentos';
+            resultsGrid.innerHTML = '';
+            return;
         }
-        return false;
-    });
 
-    if (results.length > 0) {
-        resultsCount.textContent = `${results.length} resultado${results.length !== 1 ? 's' : ''} encontrado${results.length !== 1 ? 's' : ''}`;
+        try {
+            const response = await fetch(`${API_URL}/medications/search?q=${encodeURIComponent(query)}&filter=${currentFilter}`);
+            const data = await response.json();
 
-        // Limpiar resultados anteriores
-        resultsGrid.innerHTML = '';
+            if (data.success) {
+                const results = data.data;
 
-        // Mostrar nuevos resultados
-        results.forEach((med, index) => {
-            const card = createMedicationCard(med, index);
-            resultsGrid.appendChild(card);
-        });
-    } else {
-        resultsCount.textContent = 'No se encontraron resultados';
-        resultsGrid.innerHTML = '<p style="text-align: center; color: var(--text-gray); padding: var(--spacing-xl); grid-column: 1 / -1;">Intenta con otro término de búsqueda</p>';
-    }
+                if (results.length > 0) {
+                    resultsCount.textContent = `${results.length} resultado${results.length !== 1 ? 's' : ''} encontrado${results.length !== 1 ? 's' : ''}`;
+
+                    // Limpiar resultados anteriores
+                    resultsGrid.innerHTML = '';
+
+                    // Mostrar nuevos resultados
+                    results.forEach((apiMed, index) => {
+                        const med = mapMedicationFromApi(apiMed);
+                        const card = createMedicationCard(med, index);
+                        resultsGrid.appendChild(card);
+                    });
+                } else {
+                    resultsCount.textContent = 'No se encontraron resultados';
+                    resultsGrid.innerHTML = '<p style="text-align: center; color: var(--text-gray); padding: var(--spacing-xl); grid-column: 1 / -1;">Intenta con otro término de búsqueda</p>';
+                }
+            }
+        } catch (error) {
+            console.error('Search error:', error);
+            resultsCount.textContent = 'Error en la búsqueda';
+            resultsGrid.innerHTML = '<p style="text-align: center; color: var(--error-red); padding: var(--spacing-xl); grid-column: 1 / -1;">Hubo un error al buscar. Revisa tu conexión.</p>';
+        }
+    }, 400); // 400ms debounce
 }
 
 function clearSearchResults() {
